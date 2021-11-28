@@ -1,5 +1,7 @@
 # kwai-jsonapi
-JSON:API serializer for PHP classes.
+A JSON:API serializer for PHP classes using PHP attributes.
+
+> Currently, this library has no support for [links](https://jsonapi.org/format/#document-links).
 
 ## Installation
 
