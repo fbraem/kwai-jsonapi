@@ -1,0 +1,37 @@
+{
+  "name": "kwai/jsonapi",
+  "description": "JSON:API serializer for PHP resources",
+  "keywords": [
+    "json",
+    "jsonapi"
+  ],
+  "minimum-stability": "stable",
+  "type": "library",
+  "license": "MIT",
+  "scripts": {
+    "pest": "vendor/bin/pest"
+  },
+  "authors": [
+    {
+      "name": "Franky Braem",
+      "email": "franky.braem@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.0"
+  },
+  "require-dev": {
+    "ext-json": "*",
+    "pestphp/pest": "1.21.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kwai\\JSONAPI\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Kwai\\JSONAPI\\Resources\\": "tests/Resources"
+    }
+  }
+}
