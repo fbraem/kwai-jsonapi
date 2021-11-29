@@ -16,9 +16,12 @@ PHP version must be at least 8.0. There are no other external dependencies.
 ## Documentation
 
 ### #[JSONAPI/Resource]
-The "JSONAPI/Resource" attribute is used to set the type of the resource. The type
-argument is required. This attribute can only be applied to a class. A class
-must have an **id** property.
+The "JSONAPI/Resource" attribute is used to set the type of the resource. 
+
++ The type argument is required.
++ This attribute can only be applied to a class.
++ By default, the id is retrieved from the id property. Use the id argument to 
+ use a method or a property with another name.
 
 ````php
 use Kwai\JSONAPI;
@@ -34,10 +37,11 @@ class Person
 ````
 
 ### #[JSONAPI/Attribute]
-The "JSONAPI/Attribute" attribute is used to set an attribute of a resource. This 
-attribute can be applied to a property or a method of a class. The name argument 
-can be used to give a name to the property. When applied to a method, the name 
-argument is required.
+The "JSONAPI/Attribute" attribute is used to set an attribute of a resource.
+
++ This attribute can be applied to a property or a method of a class.
++ The name argument can be used to give a name to the property.
++ When applied to a method, the name argument is required.
 
 ````php
 use Kwai\JSONAPI;
@@ -87,11 +91,12 @@ The result will be:
 ````
 
 ### #[JSONAPI/Relationship]
-The "JSONAPI/Relationship" is used to map a relationship. This attribute can be 
-applied to a property or a method. The name argument can be used to give a name 
-to the relationship. When no name argument is set for a property, the name of 
-the property will be used. When applied to a method, the name argument is
-required.
+The "JSONAPI/Relationship" is used to map a relationship.
+
++ This attribute can be applied to a property or a method.
++ The name argument can be used to give a name to the relationship.
++ When no name argument is set for a property, the name of the property will be used.
++ When applied to a method, the name argument is required.
 
 ````php
 #[JSONAPI\Resource(type:'athletes')]
