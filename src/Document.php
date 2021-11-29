@@ -179,8 +179,8 @@ final class Document
     }
 
     /**
-     * Checks all methods for the JSONAPI\Attribute attribute. The result
-     * of the method call be used to store it in the attributes object.
+     * Check all methods for the JSONAPI\Attribute attribute. The result
+     * of the method call will be used to store it in the attributes object.
      *
      * @param ReflectionClass $ref
      * @param object          $obj
@@ -218,7 +218,7 @@ final class Document
     }
 
     /**
-     * Checks all properties for the JSONAPI\Relationship attribute. The value
+     * Check all properties for the JSONAPI\Relationship attribute. The value
      * of the property will be used as linked resource.
      *
      * @throws Exception
@@ -245,7 +245,7 @@ final class Document
     }
 
     /**
-     * Checks all methods for the JSONAPI\Relationship attribute. The return
+     * Check all methods for the JSONAPI\Relationship attribute. The return
      * value of the method will be used as linked resource.
      *
      * @throws Exception
@@ -286,7 +286,7 @@ final class Document
     }
 
     /**
-     * Processes linked resources to put them in the relationship object
+     * Process linked resources to put them in the relationship object
      * and add them to the included array.
      *
      * @param mixed $value
@@ -337,6 +337,8 @@ final class Document
     }
 
     /**
+     * Try to get the value for the id of the resource.
+     *
      * @param ReflectionClass      $ref
      * @param ReflectionAttribute $resourceAttribute
      * @param object               $obj
