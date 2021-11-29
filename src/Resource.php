@@ -10,7 +10,8 @@ namespace Kwai\JSONAPI;
 class Resource
 {
     public function __construct(
-        private string $type
+        private string $type,
+        private null|string|Closure $id = null
     ) {
     }
 }

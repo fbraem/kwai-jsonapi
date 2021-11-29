@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Kwai\JSONAPI;
 
+use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionException;
 
@@ -133,13 +134,7 @@ final class Document
         }
 
         // Get the id
-        try {
-            $idProperty = $ref->getProperty('id');
-        } catch (\ReflectionException $e) {
-            throw new Exception("Can't get an id property from class " . get_class($obj));
-        }
-        $idProperty->setAccessible(true);
-        $result['id'] = (string) $idProperty->getValue($obj);
+        $result['id'] = $this->getId($ref, $attributes[0], $obj);
 
         // Get the attributes
         $result['attributes'] = array_merge(
@@ -339,5 +334,44 @@ final class Document
         )) == 0) {
             $this->included[] = $data;
         }
+    }
+
+    /**
+     * @param ReflectionClass      $ref
+     * @param ReflectionAttribute $resourceAttribute
+     * @param object               $obj
+     * @return string
+     * @throws Exception
+     */
+    private function getId(ReflectionClass $ref, ReflectionAttribute $resourceAttribute, object $obj): string
+    {
+        $arguments = $resourceAttribute->getArguments();
+        // First check if there is an id argument passed in ResourceAttribute
+        if (isset($arguments['id'])) {
+            // When a method exists with this name, call it to get the id.
+            if ($ref->hasMethod($arguments['id'])) {
+                try {
+                    $id = $ref->getMethod($arguments['id'])->invoke($obj);
+                } catch (ReflectionException $e) {
+                    throw new Exception(
+                        "Can't get the id property from method " .
+                        $arguments['id'] . " of class " . $ref->getName()
+                    );
+                }
+                return $id;
+            }
+            $propertyName = $arguments['id'];
+        } else {
+            $propertyName = 'id';
+        }
+
+        // Try to find an id property
+        try {
+            $idProperty = $ref->getProperty($propertyName);
+        } catch (\ReflectionException $e) {
+            throw new Exception("Can't get an id property from class " . get_class($obj));
+        }
+        $idProperty->setAccessible(true);
+        return (string) $idProperty->getValue($obj);
     }
 }
