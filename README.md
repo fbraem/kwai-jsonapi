@@ -1,4 +1,7 @@
 # kwai-jsonapi
+[![Latest Stable Version](http://poser.pugx.org/kwai/jsonapi/v)][link-packagist]
+[![PHP Version Require](http://poser.pugx.org/kwai/jsonapi/require/php)][link-packagist]
+
 A JSON:API serializer for PHP classes using PHP attributes.
 
 > Currently, this library has no support for [links](https://jsonapi.org/format/#document-links).
