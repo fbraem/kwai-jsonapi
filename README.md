@@ -1,6 +1,6 @@
 # kwai-jsonapi
-[![Latest Stable Version](http://poser.pugx.org/kwai/jsonapi/v)][link-packagist]
-[![PHP Version Require](http://poser.pugx.org/kwai/jsonapi/require/php)][link-packagist]
+![Latest Stable Version](http://poser.pugx.org/kwai/jsonapi/v)
+![PHP Version Require](http://poser.pugx.org/kwai/jsonapi/require/php)
 
 A JSON:API serializer for PHP classes using PHP attributes.
 
