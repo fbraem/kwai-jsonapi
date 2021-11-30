@@ -60,15 +60,21 @@ final class Document
     }
 
     /**
-     * Set a value in the meta object.
+     * Set value(s) in the meta object.
+     * When an array is passed, it will be merged with the current content
+     * of the meta object.
      *
-     * @param string $key
-     * @param mixed  $value
+     * @param string|array $keyOrArray
+     * @param mixed        $value
      * @return Document
      */
-    public function setMeta(string $key, mixed $value): Document
+    public function setMeta(string|array $keyOrArray, mixed $value = null): Document
     {
-        $this->meta[$key] = $value;
+        if (is_array($keyOrArray)) {
+            $this->meta = array_merge($this->meta, $keyOrArray);
+        } else {
+            $this->meta[$keyOrArray] = $value;
+        }
         return $this;
     }
 

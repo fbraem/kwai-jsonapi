@@ -39,3 +39,84 @@ it('can handle meta data', function () {
         ])
     ;
 });
+
+it('can set meta with an array', function () {
+    $person = new Person(
+        id: '1',
+        name: 'Jigoro Kano',
+        age: 77
+    );
+
+    try {
+        $jsonapi =
+            JSONAPI\Document::createFromObject($person)
+                ->setMeta([
+                    'count' => 1,
+                    'limit' => 10,
+                    'offset' => 0
+                ])
+                ->serialize();
+    } catch (JSONAPI\Exception $e) {
+        $this->fail((string) $e);
+    }
+
+    $json = json_decode($jsonapi);
+
+    expect($json)
+        ->toMatchObject([
+            'meta' => (object) [
+                'count' => 1,
+                'limit' => 10,
+                'offset' => 0
+            ],
+            'data' => (object) [
+                'type' => 'people',
+                'id' => '1',
+                'attributes' => (object) [
+                    'name' => 'Jigoro Kano',
+                    'age' => 77
+                ]
+            ]
+        ])
+    ;
+});
+
+it('can set meta one by one', function () {
+    $person = new Person(
+        id: '1',
+        name: 'Jigoro Kano',
+        age: 77
+    );
+
+    try {
+        $jsonapi =
+            JSONAPI\Document::createFromObject($person)
+                ->setMeta('count', 1)
+                ->setMeta('limit', 10)
+                ->setMeta('offset', 0)
+                ->serialize();
+    } catch (JSONAPI\Exception $e) {
+        $this->fail((string) $e);
+    }
+
+    $json = json_decode($jsonapi);
+
+    expect($json)
+        ->toMatchObject([
+            'meta' => (object) [
+                'count' => 1,
+                'limit' => 10,
+                'offset' => 0
+            ],
+            'data' => (object) [
+                'type' => 'people',
+                'id' => '1',
+                'attributes' => (object) [
+                    'name' => 'Jigoro Kano',
+                    'age' => 77
+                ]
+            ]
+        ])
+    ;
+});
+
