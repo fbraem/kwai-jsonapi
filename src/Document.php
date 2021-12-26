@@ -149,12 +149,12 @@ final class Document
         );
 
         // Get the relationships
-        $result['relationships'] = array_merge(
+        $relationships = array_merge(
             $this->getRelationshipsFromProperties($ref, $obj),
             $this->getRelationshipsFromMethods($ref, $obj)
         );
-        if (count($result['relationships']) == 0) {
-            unset($result['relationships']);
+        if (count($relationships) > 0) {
+            $result['relationships'] = $relationships;
         }
 
         return $result;
@@ -305,11 +305,12 @@ final class Document
         if (is_array($value)) {
             $result['data'] = [];
             foreach ($value as $linkedResource) {
-                if ($value) {
+                if ($linkedResource) {
                     $relationshipData = $this->transformObject($linkedResource);
                     $this->include($relationshipData);
-                    // Attributes are not stored in the data, so unset it here.
+                    // Attributes/relationships are not stored in the data, so unset it here.
                     unset($relationshipData['attributes']);
+                    unset($relationshipData['relationships']);
                     $result['data'][] = $relationshipData;
                 }
             }
